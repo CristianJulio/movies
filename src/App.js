@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import Boton from './components/Boton';
-import Header from './components/Header';
-import styled from '@emotion/styled';
-import Card from './components/Card';
+import React, { useState, useEffect } from "react";
+import Boton from "./components/Boton";
+import Header from "./components/Header";
+import styled from "@emotion/styled";
+import Card from "./components/Card";
 
 const Container = styled.div`
   width: 1200px;
@@ -35,65 +35,63 @@ const App = () => {
   const [peliculas, setPeliculas] = useState([]);
 
   // Token de seguridad
-  const api_key = 'be551fe925440e6bdc79ff1df5221797';
+  const api_key = "be551fe925440e6bdc79ff1df5221797";
 
   // Al cargar la página
   useEffect(() => {
-    consultarPopular(setPeliculas);
+    consultarApi(setPeliculas);
   }, []);
 
-
-  const consultarPopular = async () => {
-    const consultarPopular = await fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${api_key}`);
+  const consultarApi = async (e) => {
+    const name = e.target ? e.target.name : "popular";
+    const consultarPopular = await fetch(
+      `https://api.themoviedb.org/3/movie/${name}?api_key=${api_key}`
+    );
     const datosJson = await consultarPopular.json();
     const datos = datosJson.results;
     setPeliculas(
-      datos.map(dato => <Card key={dato.id} poster_path={dato.poster_path} title={dato.title} overview={dato.overview} />)
+      datos.map((dato) => (
+        <Card
+          key={dato.id}
+          poster_path={dato.poster_path}
+          title={dato.title}
+          overview={dato.overview}
+        />
+      ))
     );
-  }
-
-  const consultarTopRated = async () => {
-    const consultarTopRated = await fetch(`https://api.themoviedb.org/3/movie/top_rated?api_key=${api_key}`);
-    const datosJson = await consultarTopRated.json();
-    const datos = datosJson.results;
-    setPeliculas(
-      datos.map(dato => <Card key={dato.id} poster_path={dato.poster_path} title={dato.title} overview={dato.overview} />)
-    );
-  }
-
-  const consultarUpcoming = async () => {
-    const consultarUpcoming = await fetch(`https://api.themoviedb.org/3/movie/upcoming?api_key=${api_key}`);
-    const datosJson = await consultarUpcoming.json();
-    const datos = datosJson.results;
-    setPeliculas(
-      datos.map(dato => <Card key={dato.id} poster_path={dato.poster_path} title={dato.title} overview={dato.overview} />)
-    );
-  }
-
-  const consultarNowPlaying = async () => {
-    const consultarNowPlaying = await fetch(`https://api.themoviedb.org/3/movie/now_playing?api_key=${api_key}`);
-    const datosJson = await consultarNowPlaying.json();
-    const datos = datosJson.results;
-    setPeliculas(
-      datos.map(dato => <Card key={dato.id} poster_path={dato.poster_path} title={dato.title} overview={dato.overview} />)
-    );
-  }
+  };
 
   return (
     <>
       <Header />
       <Container>
-        <Boton contenido="Popular" onClick={consultarPopular} />
-        <Boton contenido="Top Rated" onClick={consultarTopRated} />
-        <Boton contenido="Upcoming" onClick={consultarUpcoming} />
-        <Boton contenido="Now playing" onClick={consultarNowPlaying} />
+        <Boton 
+          contenido="Popular" 
+          onClick={consultarApi} 
+          name="popular" 
+        />
+        <Boton 
+          contenido="Top Rated" 
+          onClick={consultarApi} 
+          name="top_rated" 
+        />
+        <Boton 
+          contenido="Upcoming" 
+          onClick={consultarApi} 
+          name="upcoming" 
+        />
+        <Boton
+          contenido="Now playing"
+          onClick={consultarApi}
+          name="now_playing"
+        />
 
         <ContainerPeliculas>
-          {peliculas.map(pelicula => pelicula)}
+          {peliculas.map((pelicula) => pelicula)}
         </ContainerPeliculas>
       </Container>
     </>
   );
-}
+};
 
 export default App;
