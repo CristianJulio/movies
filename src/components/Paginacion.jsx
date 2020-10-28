@@ -1,5 +1,5 @@
-import React from 'react';
-import styled from '@emotion/styled';
+import React from "react";
+import styled from "@emotion/styled";
 
 const ContenedorPaginacion = styled.ul`
   display: flex;
@@ -23,25 +23,45 @@ const ContenedorPaginacion = styled.ul`
   }
 `;
 
-const Paginacion = ({setPage}) => {
-  const obtenerNumero = e => {
+const Paginacion = ({ setPage }) => {
+  const obtenerNumero = (e) => {
     setPage(Number(e.target.id));
-  }
+  };
 
   return (
     <ContenedorPaginacion>
-      <li id="1" onClick={obtenerNumero}>1</li>
-      <li id="2" onClick={obtenerNumero}>2</li>
-      <li id="3" onClick={obtenerNumero}>3</li>
-      <li id="4" onClick={obtenerNumero}>4</li>
-      <li id="5" onClick={obtenerNumero}>5</li>
-      <li id="6" onClick={obtenerNumero}>6</li>
-      <li id="7" onClick={obtenerNumero}>7</li>
-      <li id="8" onClick={obtenerNumero}>8</li>
-      <li id="9" onClick={obtenerNumero}>9</li>
-      <li id="10" onClick={obtenerNumero}>10</li>
+      <li id="1" onClick={obtenerNumero}>
+        1
+      </li>
+      <li id="2" onClick={obtenerNumero}>
+        2
+      </li>
+      <li id="3" onClick={obtenerNumero}>
+        3
+      </li>
+      <li id="4" onClick={obtenerNumero}>
+        4
+      </li>
+      <li id="5" onClick={obtenerNumero}>
+        5
+      </li>
+      <li id="6" onClick={obtenerNumero}>
+        6
+      </li>
+      <li id="7" onClick={obtenerNumero}>
+        7
+      </li>
+      <li id="8" onClick={obtenerNumero}>
+        8
+      </li>
+      <li id="9" onClick={obtenerNumero}>
+        9
+      </li>
+      <li id="10" onClick={obtenerNumero}>
+        10
+      </li>
     </ContenedorPaginacion>
   );
-}
+};
 
 export default Paginacion;

@@ -1,5 +1,5 @@
-import React from 'react';
-import styled from '@emotion/styled';
+import React from "react";
+import styled from "@emotion/styled";
 
 const ContainerHeader = styled.header`
   background: #333;
@@ -8,8 +8,8 @@ const ContainerHeader = styled.header`
 `;
 
 const H1 = styled.h1`
-  color: #FFFFFF;
-  font-family: 'Lobster', cursive;
+  color: #ffffff;
+  font-family: "Lobster", cursive;
   padding: 0 20px;
 `;
 
@@ -19,6 +19,6 @@ const Header = () => {
       <H1>Películas</H1>
     </ContainerHeader>
   );
-}
+};
 
 export default Header;

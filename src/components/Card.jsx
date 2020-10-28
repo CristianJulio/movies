@@ -1,5 +1,5 @@
-import React from 'react';
-import styled from '@emotion/styled';
+import React from "react";
+import styled from "@emotion/styled";
 
 const ContainerCard = styled.div`
   border: 1px solid #ececec;
@@ -8,8 +8,9 @@ const ContainerCard = styled.div`
   overflow: hidden;
   width: 250px;
 
-  h2, p {
-    font-family: 'Roboto', sans-serif;
+  h2,
+  p {
+    font-family: "Roboto", sans-serif;
     padding: 5px 10px;
   }
 `;
@@ -25,18 +26,18 @@ const ContainerImg = styled.div`
   }
 `;
 
-const Card = ({poster_path, title, overview}) => {
+const Card = ({ poster_path, title, overview }) => {
   const url = `https://image.tmdb.org/t/p/w500/${poster_path}`;
 
   return (
     <ContainerCard>
       <ContainerImg>
-        <img src={url} alt=""/>
+        <img src={url} alt="" />
       </ContainerImg>
       <h2>{title}</h2>
       <p>{overview.substr(0, 100)}...</p>
     </ContainerCard>
   );
-}
+};
 
 export default Card;

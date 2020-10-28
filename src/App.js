@@ -36,15 +36,16 @@ const App = () => {
   // State de películas
   const [peliculas, setPeliculas] = useState([]);
   const [page, setPage] = useState(1);
-  const [opcion, setOpcion] = useState('popular');
+  const [opcion, setOpcion] = useState("popular");
 
   // Token de seguridad
   const api_key = "be551fe925440e6bdc79ff1df5221797";
 
   const consultarApi = async (e) => {
     // Aqui obtengo el tipo de lista de películas si es la primera vez será popular por defecto
-    // const name = e ? e.target.name : 'popular';
-    const consultarPopular = await fetch(`https://api.themoviedb.org/3/movie/${opcion}?api_key=${api_key}&page=${page}`);
+    const consultarPopular = await fetch(
+      `https://api.themoviedb.org/3/movie/${opcion}?api_key=${api_key}&page=${page}`
+    );
     const datosJson = await consultarPopular.json();
     const datos = datosJson.results;
 
@@ -60,10 +61,10 @@ const App = () => {
       ))
     );
 
-    if(e) {
+    if (e) {
       setPage(1);
-      setOpcion(e.target.name); 
-    };
+      setOpcion(e.target.name);
+    }
   };
 
   // Al cargar la página
@@ -75,20 +76,19 @@ const App = () => {
     <>
       <Header />
       <Container>
-        <Boton 
-          contenido="Popular" 
+        <Boton
+          contenido="Popular"
           onClick={consultarApi}
           name="popular"
-          setPage={setPage}
         />
         <Boton 
           contenido="Top Rated" 
-          onClick={consultarApi}
-          name="top_rated"
+          onClick={consultarApi} 
+          name="top_rated" 
         />
         <Boton 
           contenido="Upcoming" 
-          onClick={consultarApi}
+          onClick={consultarApi} 
           name="upcoming" 
         />
         <Boton
