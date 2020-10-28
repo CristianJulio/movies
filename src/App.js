@@ -3,6 +3,7 @@ import Boton from "./components/Boton";
 import Header from "./components/Header";
 import styled from "@emotion/styled";
 import Card from "./components/Card";
+import Paginacion from "./components/Paginacion";
 
 const Container = styled.div`
   width: 1200px;
@@ -28,27 +29,26 @@ const Container = styled.div`
 const ContainerPeliculas = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
+  grid-gap: 10px;
 `;
 
 const App = () => {
   // State de películas
   const [peliculas, setPeliculas] = useState([]);
+  const [page, setPage] = useState(1);
+  const [opcion, setOpcion] = useState('popular');
 
   // Token de seguridad
   const api_key = "be551fe925440e6bdc79ff1df5221797";
 
-  // Al cargar la página
-  useEffect(() => {
-    consultarApi(setPeliculas);
-  }, []);
-
   const consultarApi = async (e) => {
-    const name = e.target ? e.target.name : "popular";
-    const consultarPopular = await fetch(
-      `https://api.themoviedb.org/3/movie/${name}?api_key=${api_key}`
-    );
+    // Aqui obtengo el tipo de lista de películas si es la primera vez será popular por defecto
+    // const name = e ? e.target.name : 'popular';
+    const consultarPopular = await fetch(`https://api.themoviedb.org/3/movie/${opcion}?api_key=${api_key}&page=${page}`);
     const datosJson = await consultarPopular.json();
     const datos = datosJson.results;
+
+    // Guardo el array con las películas obtenidas desde la api
     setPeliculas(
       datos.map((dato) => (
         <Card
@@ -59,7 +59,17 @@ const App = () => {
         />
       ))
     );
+
+    if(e) {
+      setPage(1);
+      setOpcion(e.target.name); 
+    };
   };
+
+  // Al cargar la página
+  useEffect(() => {
+    consultarApi();
+  }, [page, opcion]);
 
   return (
     <>
@@ -67,17 +77,18 @@ const App = () => {
       <Container>
         <Boton 
           contenido="Popular" 
-          onClick={consultarApi} 
-          name="popular" 
+          onClick={consultarApi}
+          name="popular"
+          setPage={setPage}
         />
         <Boton 
           contenido="Top Rated" 
-          onClick={consultarApi} 
-          name="top_rated" 
+          onClick={consultarApi}
+          name="top_rated"
         />
         <Boton 
           contenido="Upcoming" 
-          onClick={consultarApi} 
+          onClick={consultarApi}
           name="upcoming" 
         />
         <Boton
@@ -89,6 +100,8 @@ const App = () => {
         <ContainerPeliculas>
           {peliculas.map((pelicula) => pelicula)}
         </ContainerPeliculas>
+
+        <Paginacion setPage={setPage} />
       </Container>
     </>
   );
