@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "@emotion/styled";
+import { ModalContext } from "../context/modalContext";
+
 
 const ContainerCard = styled.div`
   border: 1px solid #ececec;
@@ -13,11 +15,16 @@ const ContainerCard = styled.div`
     font-family: "Roboto", sans-serif;
     padding: 5px 10px;
   }
+
+  button {
+    margin: 15px 0 15px 15px;
+  }
 `;
 
 const ContainerImg = styled.div`
-  width: 250px;
+  cursor: pointer;
   height: 300px;
+  width: 250px;
 
   img {
     width: 100%;
@@ -26,17 +33,26 @@ const ContainerImg = styled.div`
   }
 `;
 
-const Card = ({ poster_path, title, overview }) => {
+const Card = ({ poster_path, title, overview, id, onClick}) => {
   const url = `https://image.tmdb.org/t/p/w500/${poster_path}`;
+  const { setPeliculaId } = useContext(ModalContext);
+
+  // Aquí abro el modal y obtengo el ID de la película
+  const modalFunction = () => {
+    onClick();
+    setPeliculaId(id);
+  }
 
   return (
-    <ContainerCard>
-      <ContainerImg>
-        <img src={url} alt="" />
-      </ContainerImg>
-      <h2>{title}</h2>
-      <p>{overview.substr(0, 100)}...</p>
-    </ContainerCard>
+    <>
+      <ContainerCard>
+        <ContainerImg onClick={modalFunction}>
+          <img src={url} alt="" />
+        </ContainerImg>
+        <h2>{title}</h2>
+        <p>{overview.substr(0, 100)}...</p>
+      </ContainerCard>
+    </>
   );
 };
 

@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "@emotion/styled";
+import { ListaPeliculasContext } from '../context/listaPeliculasContext';
 
 const ContenedorPaginacion = styled.ul`
   display: flex;
@@ -23,43 +24,21 @@ const ContenedorPaginacion = styled.ul`
   }
 `;
 
-const Paginacion = ({ setPage }) => {
-  const obtenerNumero = (e) => {
-    setPage(Number(e.target.id));
-  };
+const Paginacion = () => {
+  const { setPage } = useContext(ListaPeliculasContext);
 
   return (
     <ContenedorPaginacion>
-      <li id="1" onClick={obtenerNumero}>
-        1
-      </li>
-      <li id="2" onClick={obtenerNumero}>
-        2
-      </li>
-      <li id="3" onClick={obtenerNumero}>
-        3
-      </li>
-      <li id="4" onClick={obtenerNumero}>
-        4
-      </li>
-      <li id="5" onClick={obtenerNumero}>
-        5
-      </li>
-      <li id="6" onClick={obtenerNumero}>
-        6
-      </li>
-      <li id="7" onClick={obtenerNumero}>
-        7
-      </li>
-      <li id="8" onClick={obtenerNumero}>
-        8
-      </li>
-      <li id="9" onClick={obtenerNumero}>
-        9
-      </li>
-      <li id="10" onClick={obtenerNumero}>
-        10
-      </li>
+      <li id="1" onClick={e => setPage(e.target.id)}>1</li>
+      <li id="2" onClick={e => setPage(e.target.id)}>2</li>
+      <li id="3" onClick={e => setPage(e.target.id)}>3</li>
+      <li id="4" onClick={e => setPage(e.target.id)}>4</li>
+      <li id="5" onClick={e => setPage(e.target.id)}>5</li>
+      <li id="6" onClick={e => setPage(e.target.id)}>6</li>
+      <li id="7" onClick={e => setPage(e.target.id)}>7</li>
+      <li id="8" onClick={e => setPage(e.target.id)}>8</li>
+      <li id="9" onClick={e => setPage(e.target.id)}>9</li>
+      <li id="10" onClick={e => setPage(e.target.id)}>10</li>
     </ContenedorPaginacion>
   );
 };

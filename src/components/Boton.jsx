@@ -17,9 +17,9 @@ const BotonStyled = styled.button`
   }
 `;
 
-const Boton = ({ contenido, onClick, name }) => {
+const Boton = ({ contenido, onClick }) => {
   return (
-    <BotonStyled onClick={onClick} name={name}>
+    <BotonStyled onClick={onClick}>
       {contenido}
     </BotonStyled>
   );
