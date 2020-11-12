@@ -15,7 +15,7 @@ const H1 = styled.h1`
 
 const Header = () => {
   return (
-    <ContainerHeader>
+    <ContainerHeader className="header">
       <H1>Películas</H1>
     </ContainerHeader>
   );

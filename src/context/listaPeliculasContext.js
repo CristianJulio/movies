@@ -15,6 +15,9 @@ export const ListaPeliculasProvider = props => {
       const datosJson = await consultarApi.json();
       const datos = datosJson;
       setPeliculas(datos.results);
+
+      const header = document.querySelector('.header');
+      header.scrollIntoView({behavior: 'smooth'})
     }
     consultarApi();
   }, [opcion, page]);
